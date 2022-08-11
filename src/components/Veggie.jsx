@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import styled from "styled-components";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import '@splidejs/react-splide/css';
 
 const Veggie = () => {
-
   const [veggie, setVeggie] = useState( [] )
   
-  useEffect( () => { getVeggie();
-  }, [] )
+  useEffect( () => {
+    getVeggie();
+  }, [])
   
-
   const getVeggie = async () => {
+    
     const check = localStorage.getItem( 'veggie' );
 
     if ( check )
@@ -21,11 +21,10 @@ const Veggie = () => {
     {
       const api= await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=9&tags=vegetarian,vegan`)
       const data = await api.json()
+      
+      localStorage.setItem( 'veggie', JSON.stringify( data.recipes ) )
       setVeggie( data.recipes )
-      localStorage.setItem('veggie',JSON.stringify(data.recipes))
-      console.log(veggie) 
-    }
-
+    };
   }
 
   return (
