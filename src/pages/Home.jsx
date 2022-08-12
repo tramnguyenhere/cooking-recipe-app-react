@@ -1,18 +1,15 @@
-import Veggie from "../components/Veggie";
-import Popular from "../components/Popular";
-import Search from "../components/Search";
-import React from 'react'
+import Veggie from '../components/Veggie';
+import Popular from '../components/Popular';
 
-
+import React from 'react';
 
 const Home = () => {
   return (
     <div>
-        <Search />
-        <Veggie />
-        <Popular />  
+      <Veggie />
+      <Popular />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
