@@ -2,13 +2,12 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Recipe = () => {
+function Recipe() {
+  let params = useParams();
   const [details, setDetails] = useState({});
   const [activeTab, setActiveTab] = useState('instructions');
 
-  let params = useParams();
-
-  const fetchDetails = async (name) => {
+  const fetchDetails = async () => {
     const data = await fetch(
       `https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}`
     );
@@ -18,6 +17,7 @@ const Recipe = () => {
 
   useEffect(() => {
     fetchDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.name]);
 
   return (
@@ -54,7 +54,7 @@ const Recipe = () => {
       </Info>
     </DetailWrapper>
   );
-};
+}
 
 const DetailWrapper = styled.div`
   margin-top: 10rem;
