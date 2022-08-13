@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const Recipe = () => {
   const [details, setDetails] = useState({});
-  const [activeTab, setActiveTab] = useState('instruction');
+  const [activeTab, setActiveTab] = useState('instructions');
 
   let params = useParams();
 
@@ -14,7 +14,6 @@ const Recipe = () => {
     );
     const detailData = await data.json();
     setDetails(detailData);
-    console.log(detailData);
   };
 
   useEffect(() => {
@@ -23,10 +22,10 @@ const Recipe = () => {
 
   return (
     <DetailWrapper>
-      <>
+      <div>
         <h2>{details.title}</h2>
         <img src={details.image} alt={details.title} />
-      </>
+      </div>
       <Info>
         <Button
           className={activeTab === 'instructions' ? 'active' : ''}
@@ -42,7 +41,6 @@ const Recipe = () => {
         </Button>
         {activeTab === 'instructions' && (
           <>
-            <h3 dangerouslySetInnerHTML={{ __html: details.summary }}></h3>
             <h3 dangerouslySetInnerHTML={{ __html: details.instructions }}></h3>
           </>
         )}
